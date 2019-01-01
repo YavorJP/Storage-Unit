@@ -1,0 +1,11 @@
+CREATE TABLE [dbo].[AddItemsViewModels] (
+    [Id]          INT             IDENTITY (1, 1) NOT NULL,
+    [ItemName]    NVARCHAR (50)   NOT NULL,
+    [Description] NVARCHAR (2000) NULL,
+    [Type]        NVARCHAR (MAX)  NULL,
+    [Code]        INT             NOT NULL,
+    [Bought]      FLOAT (53)      NOT NULL,
+    [Selling]     FLOAT (53)      NOT NULL,
+    [Quantity]    INT             DEFAULT ((0)) NOT NULL,
+    CONSTRAINT [PK_dbo.AddItemsViewModels] PRIMARY KEY CLUSTERED ([Id] ASC)
+);

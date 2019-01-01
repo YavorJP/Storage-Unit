@@ -1,0 +1,100 @@
+﻿@model IEnumerable<StorageUnit.Models.AddItemsViewModel>
+
+@{
+    ViewBag.Title = "ItemsTable";
+}
+
+        @using (Html.BeginForm("ItemsTable", "Home", FormMethod.Get))
+        {
+            List<SelectListItem> searchBy = new List<SelectListItem>();
+            searchBy.Add(new SelectListItem
+            {
+                Text = "Search by Name",
+                Value = "ItemName",
+                Selected = true
+        });
+            searchBy.Add(new SelectListItem
+            {
+             Text = "Search by Code",
+             Value = "Code"
+            });
+
+        List<SelectListItem> category = new List<SelectListItem>();
+        category.Add(new SelectListItem
+        {
+            Text = "Хранителни стоки",
+            Value = "Хранителни стоки"
+        });
+        category.Add(new SelectListItem
+        {
+            Text = "Канцеларски материали",
+            Value = "Канцеларски материали",
+
+        });
+        category.Add(new SelectListItem
+        {
+            Text = "Строителни материали",
+            Value = "Строителни материали"
+        });
+        <p>
+            <table>
+                <tr>
+                    <td padding: 0.5em; padding-right: 1em;>@Html.DropDownList("searchBy", searchBy, new { @class = "form-control" })</td>
+                    <td padding: 0.5em; padding-right: 1em;>@Html.DropDownList("category", category, "Select Category", new { @class = "form-control" })</td>
+                    <td padding: 0.5em; padding-right: 1em;>@Html.TextBox("SearchString") </td>
+                    <td padding: 0.5em; padding-right: 1em;><input type="submit" value="Search" /></td>
+                </tr>
+            </table>
+            
+        </p>
+        }    
+
+
+
+<div>
+    <table class="table table-bordered table-responsive table-hover" id="tblItems">
+        <tr>
+            <th>Item Name </th>
+            <th>Description </th>
+            <th>Bought For </th>
+            <th>Selling For </th>
+            <th>Quantity </th>
+            <th>Category </th>
+            <th>Code</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bought)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Selling)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "UpdateItem", new { id = item.Id }) |  
+                    
+                    @Html.ActionLink("Delete", "DeleteItem", new { id = item.Id },
+                     new { onclick = "return confirm('Are you sure you wish to delete this item?');" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
